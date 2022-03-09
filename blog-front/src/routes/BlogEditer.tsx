@@ -7,7 +7,6 @@ import {
   MediaQuery,
   Navbar,
   ScrollArea,
-  Text,
   useMantineTheme,
 } from "@mantine/core";
 import { AuthProvider } from "../context/Authcontext.jsx";
@@ -70,10 +69,7 @@ function BlogEditor(props: Props) {
         }
         header={
           <Header height={70} padding="md">
-            {/* Handle other responsive styles with MediaQuery component or createStyles function */}
-            <div
-              style={{ display: "flex", alignItems: "center", height: "100%" }}
-            >
+            <div className="flex items-center h-[100%]">
               <MediaQuery largerThan="sm" styles={{ display: "none" }}>
                 <Burger
                   opened={opened}
