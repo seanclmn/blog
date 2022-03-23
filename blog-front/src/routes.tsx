@@ -2,6 +2,7 @@ import BlogContent from "./routes/BlogContent";
 import Home from "./routes/Home";
 import BlogEditor from "./routes/BlogEditer";
 import Signup from "./routes/Signup"
+import Signin from "./routes/Signin"
 export const Routes = [
   {
     path: "home",
@@ -16,6 +17,10 @@ export const Routes = [
   {
     path: "signup",
     element: <Signup />,
+  },
+  {
+    path: "signin",
+    element: <Signin />,
   },
   {
     path: "editing",
