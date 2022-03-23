@@ -22,6 +22,7 @@ function BlogContent(props: Props) {
       />
 
       <div className="w-[80%] text-left">
+        
         <p>
           &emsp;&emsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Donec ornare massa vel est facilisis, a mollis odio posuere. Quisque

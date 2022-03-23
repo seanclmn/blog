@@ -1,7 +1,7 @@
 import BlogContent from "./routes/BlogContent";
 import Home from "./routes/Home";
 import BlogEditor from "./routes/BlogEditer";
-
+import Signup from "./routes/Signup"
 export const Routes = [
   {
     path: "home",
@@ -12,6 +12,10 @@ export const Routes = [
         element: <BlogContent />,
       },
     ],
+  },
+  {
+    path: "signup",
+    element: <Signup />,
   },
   {
     path: "editing",
