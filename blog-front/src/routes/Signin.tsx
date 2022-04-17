@@ -1,4 +1,6 @@
+// @ts-nocheck
 import React from 'react'
+import Login from '../components/Login'
 
 interface Props {}
 
@@ -7,7 +9,7 @@ function Signin(props: Props) {
 
     return (
         <div>
-            signin
+            <Login/>
         </div>
     )
 }

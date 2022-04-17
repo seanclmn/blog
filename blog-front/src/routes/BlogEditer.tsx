@@ -9,7 +9,7 @@ import {
   ScrollArea,
   useMantineTheme,
 } from "@mantine/core";
-import { AuthProvider } from "../context/Authcontext.jsx";
+import { AuthProvider } from "../context/Authcontext";
 
 interface Props {}
 
