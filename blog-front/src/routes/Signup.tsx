@@ -25,6 +25,7 @@ function Signup(props: Props) {
         setPasswordToggle(!passwordToggle)
     }
     function submitHandler(e: React.MouseEvent<HTMLButtonElement>){
+        e.preventDefault()
         auth.createUserWithEmailAndPassword(newEmail,newPassword).then(cred=>{
             e.preventDefault()
             return db.collection('users').doc(cred.user!.uid)

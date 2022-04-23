@@ -9,6 +9,7 @@ import Home from "./routes/Home";
 import PrivateRoute from "./privateroute/PrivateRoute";
 import SignIn from "./routes/Signin"
 import SignUp from "./routes/Signup"
+import BlogEditor from "./routes/BlogEditer";
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
             <Route path= '/editor'
                 element={
                   <PrivateRoute>
-                    <Home/>
+                    <BlogEditor/>
                   </PrivateRoute>
             
                 }

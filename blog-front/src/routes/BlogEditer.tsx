@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "@tanstack/react-location";
+import { Link } from "react-router-dom";
 import {
   AppShell,
   Burger,
@@ -9,6 +9,7 @@ import {
   ScrollArea,
   useMantineTheme,
 } from "@mantine/core";
+import Signout from '../components/Signout'
 import { AuthProvider } from "../context/Authcontext";
 
 interface Props {}
@@ -48,6 +49,7 @@ function BlogEditor(props: Props) {
             width={{ sm: 200, lg: 300 }}
           >
             <Navbar.Section grow component={ScrollArea}>
+
               <BlogLink blog_post="blog" date={"datedate"} link="1234" />
               <BlogLink blog_post="blog" date={"datedate"} link="home" />
               <BlogLink blog_post="blog" date={"datedate"} link="home" />
@@ -83,7 +85,8 @@ function BlogEditor(props: Props) {
           </Header>
         }
       >
-        <Outlet />
+        <p>hello</p>
+        <Signout/>
       </AppShell>
     </AuthProvider>
   );
