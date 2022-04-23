@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Routes, Route, Link, Outlet } from "react-router-dom";
 import {
   AppShell,
   Burger,
@@ -11,6 +11,7 @@ import {
 } from "@mantine/core";
 import Signout from '../components/Signout'
 import { AuthProvider } from "../context/Authcontext";
+import BlogContent from "./BlogContent";
 
 interface Props {}
 
@@ -23,7 +24,7 @@ interface BlogLinkProps {
 export function BlogLink(props: BlogLinkProps) {
   const { blog_post, date, link } = props;
   return (
-    <Link to={`/editing/${link}`}>
+    <Link to={`/editor/${link}`}>
       <div className="border-solid border-x-0 border-[1px] border-gray-200 p-[10px] cursor-pointer">
         <p>{blog_post}</p>
         <p>{date}</p>
@@ -87,6 +88,10 @@ function BlogEditor(props: Props) {
       >
         <p>hello</p>
         <Signout/>
+        {/* <Routes>
+          <Route path={`editor/:blogpostid`} element={<BlogContent/>}/>
+        </Routes>         */}
+        <Outlet/>
       </AppShell>
     </AuthProvider>
   );

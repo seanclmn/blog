@@ -1,14 +1,10 @@
+// @ts-nocheck
 import React from "react";
-import { useMatch } from "@tanstack/react-location";
+import { useParams } from "react-router-dom";
 
-interface Props {}
 
-function BlogContent(props: Props) {
-  const {} = props;
-  const id = "1234";
-  const {
-    params: { blogpostid },
-  } = useMatch();
+function BlogContent() {  
+  let {blogpostid} = useParams();
   return (
     <div className="w-[100%] flex flex-col items-center">
       <p className="text-5xl">

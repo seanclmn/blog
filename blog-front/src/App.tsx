@@ -6,10 +6,11 @@ import { AuthProvider } from "./context/Authcontext"
 import {auth} from "./Firebase"
 import { BrowserRouter as Router, Switch, Routes, Route} from 'react-router-dom'
 import Home from "./routes/Home";
-import PrivateRoute from "./privateroute/PrivateRoute";
+import PrivateRoute from "./privateroute/PrivateRoute.tsx";
 import SignIn from "./routes/Signin"
 import SignUp from "./routes/Signup"
 import BlogEditor from "./routes/BlogEditer";
+import BlogContent from "./routes/BlogContent";
 
 function App() {
 
@@ -24,14 +25,9 @@ function App() {
       <AuthProvider> 
         <Router>
           <Routes>
-            <Route path= '/editor'
-                element={
-                  <PrivateRoute>
-                    <BlogEditor/>
-                  </PrivateRoute>
-            
-                }
-              />
+            <Route path= '/editor' element={<PrivateRoute><BlogEditor/> </PrivateRoute>}>
+              <Route path=":blogpostid" element={<BlogContent/>}/>
+            </Route>
             <Route path='/home' element={<Home/>}/>
             <Route exact path='/signin' element={<SignIn/>}/>
             <Route path='/signup' element={<SignUp/>}/>
