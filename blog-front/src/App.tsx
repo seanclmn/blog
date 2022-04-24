@@ -10,7 +10,7 @@ import PrivateRoute from "./privateroute/PrivateRoute.tsx";
 import SignIn from "./routes/Signin"
 import SignUp from "./routes/Signup"
 import BlogEditor from "./routes/BlogEditer";
-import BlogContent from "./routes/BlogContent";
+import BlogContent from "./routes/BlogContentEditor";
 
 function App() {
 

@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import Signout from '../components/Signout'
 import { AuthProvider } from "../context/Authcontext";
-import BlogContent from "./BlogContent";
+import BlogContent from "./BlogContentEditor";
 
 interface Props {}
 
@@ -26,8 +26,7 @@ export function BlogLink(props: BlogLinkProps) {
   return (
     <Link to={`/editor/${link}`}>
       <div className="border-solid border-x-0 border-[1px] border-gray-200 p-[10px] cursor-pointer">
-        <p>{blog_post}</p>
-        <p>{date}</p>
+        <p>{blog_post} ({date})</p>
       </div>
     </Link>
   );
@@ -51,28 +50,17 @@ function BlogEditor(props: Props) {
           >
             <Navbar.Section grow component={ScrollArea}>
 
-              <BlogLink blog_post="blog" date={"datedate"} link="1234" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
-              <BlogLink blog_post="blog" date={"datedate"} link="home" />
+              <BlogLink blog_post="blog" date={"11/1/1998"} link="1234" />
+              <BlogLink blog_post="blog" date={"11/1/1998"} link="yo-mama" />
+              <BlogLink blog_post="blog" date={"11/1/1998"} link="noice-one" />
+              <BlogLink blog_post="blog" date={"11/1/1998"} link="home" />
             </Navbar.Section>
           </Navbar>
         }
-        header={
+        header={  
           <Header height={70} padding="md">
             <div className="flex items-center h-[100%]">
+              <Signout/>
               <MediaQuery largerThan="sm" styles={{ display: "none" }}>
                 <Burger
                   opened={opened}
@@ -86,11 +74,6 @@ function BlogEditor(props: Props) {
           </Header>
         }
       >
-        <p>hello</p>
-        <Signout/>
-        {/* <Routes>
-          <Route path={`editor/:blogpostid`} element={<BlogContent/>}/>
-        </Routes>         */}
         <Outlet/>
       </AppShell>
     </AuthProvider>

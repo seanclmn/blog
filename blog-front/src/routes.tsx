@@ -1,4 +1,4 @@
-import BlogContent from "./routes/BlogContent";
+import BlogContent from "./routes/BlogContentEditor";
 import Home from "./routes/Home";
 import BlogEditor from "./routes/BlogEditer";
 import Signup from "./routes/Signup"
