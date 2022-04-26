@@ -22,11 +22,11 @@ const Login = () => {
         <div>
             <form 
                 onSubmit={handleSubmit(onSubmit)}
-                className='flex flex-col items-center w-[300px] m-auto'>
-                <p>Login here</p>
-                <TextInput label="Username" {...register("email")}/>
-                <TextInput label="Password" {...register("password")}/>
-                <Button type="submit"> Log in</Button>
+                className='flex flex-col justify-around items-center w-[300px] h-[320px] m-auto'>
+                <h2 className='font-thin'>Welcome</h2>
+                <TextInput label="Username" className='w-[250px]' {...register("email")}/>
+                <TextInput label="Password" className='w-[250px]' {...register("password")}/>
+                <Button type="submit" className='w-[250px] h-[40px] mt-[20px]'> Log in</Button>
                 
             </form>
         </div>)
