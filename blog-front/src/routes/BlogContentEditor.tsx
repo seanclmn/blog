@@ -1,32 +1,59 @@
 // @ts-nocheck
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import {useForm } from 'react-hook-form'
 import { Textarea, Button } from '@mantine/core'
 import { auth } from "../Firebase";
+import firebase from "firebase";
+import { doc, onSnapshot } from "firebase/firestore";
+
 
 function BlogContent() {  
+
+  const [blog,setBlog]= useState([]);
+  const [loading,setLoading]=useState(false)
+
+
   let {blogpostid} = useParams();
+  const ref = firebase.firestore().collection("blogs")
+  function getBlogs(){
+    setLoading(true)
+    ref.onSnapshot((querySnapshot)=>{
+      const items = []
+      querySnapshot.forEach((doc)=>{
+        items.push(doc)
+      })
+      setBlogs(items)
+    })
+  }
+
+  useEffect(() => {
+    firebase.firestore().collection("blogs").doc(blogpostid).onSnapshot(function(doc) {
+      setBlog( doc.data());
+      setLoading(false)
+    })
+  },[blogpostid])
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const blogString = "This is my blog post - I hope you enjoyed it."
   const onSubmit = (data,event)=> {
     event?.preventDefault()
     console.log(data)
   }
+  if (loading) return null
   return (
     <div className="w-[100%] flex flex-col items-center">
       <p className="text-5xl">
-        <b>Lorem Ipsum </b>
+        <b>{blog.title }</b>
       </p>
-      <p>{blogpostid} 3/6/2022</p>
+      <p>{blog.author} ({blog.date})</p>
       {/* <p>blog content {blogpostid}</p> */}
       <img
         className="w-[50%] m-7"
-        src="https://lp-cms-production.imgix.net/2021-02/Tokyo%20Main.jpg"
+        src={blog.image}
       />
       
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center justify-between w-[80%] h-[450px] text-left">
-        <textarea className="w-[100%] h-[400px] resize-none overflow-auto" {...register("blogtext")} defaultValue={blogString}></textarea>
+        <textarea className="w-[100%] h-[400px] resize-none overflow-auto" {...register("blogtext")} defaultValue={blog.text}></textarea>
         <Button type="submit">Save</Button>
       </form>
     </div>

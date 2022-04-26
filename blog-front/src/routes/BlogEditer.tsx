@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+//@ts-nocheck
+import React, { useEffect, useState } from "react";
+import firebase from "firebase";
+import { doc, onSnapshot } from "firebase/firestore";
 import { Routes, Route, Link, Outlet } from "react-router-dom";
 import {
   AppShell,
@@ -24,18 +27,42 @@ interface BlogLinkProps {
 export function BlogLink(props: BlogLinkProps) {
   const { blog_post, date, link } = props;
   return (
-    <Link to={`/editor/${link}`}>
+    <Link to={`/editor/${link}`} className="no-underline text-black">
       <div className="border-solid border-x-0 border-[1px] border-gray-200 p-[10px] cursor-pointer">
-        <p>{blog_post} ({date})</p>
+        <p>{blog_post} ({new Date(date).toLocaleDateString("en-US")})</p>
       </div>
     </Link>
   );
 }
 
 function BlogEditor(props: Props) {
+
+  const [blogs, setBlogs] = useState()
+  const [loading, setLoading] = useState(true)
+
+  const ref = firebase.firestore().collection("blogs")
+  function getBlogs(){
+    
+    ref.onSnapshot((querySnapshot)=>{
+      const items = []
+      querySnapshot.forEach((doc)=>{
+        items.push({data: doc.data(), id: doc.id})
+      })
+      console.log(items)
+      setBlogs(items.sort((a,b)=>new Date(a.data.date)-new Date(b.data.date)))
+    })
+  }
+
   const {} = props;
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
+
+  useEffect(()=>{
+    getBlogs()
+    setLoading(false)
+  },[])
+
+  if(loading) return <p>loading...</p>
 
   return (
     <AuthProvider>
@@ -50,10 +77,7 @@ function BlogEditor(props: Props) {
           >
             <Navbar.Section grow component={ScrollArea}>
 
-              <BlogLink blog_post="blog" date={"11/1/1998"} link="1234" />
-              <BlogLink blog_post="blog" date={"11/1/1998"} link="yo-mama" />
-              <BlogLink blog_post="blog" date={"11/1/1998"} link="noice-one" />
-              <BlogLink blog_post="blog" date={"11/1/1998"} link="home" />
+              {blogs && blogs.map((blog)=><BlogLink blog_post={blog.data.title} date={blog.data.date} link={blog.id} key={blog.id}/>)}
             </Navbar.Section>
           </Navbar>
         }
