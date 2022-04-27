@@ -15,18 +15,6 @@ function BlogContent() {
 
 
   let {blogpostid} = useParams();
-  const ref = firebase.firestore().collection("blogs")
-  function getBlogs(){
-    setLoading(true)
-    ref.onSnapshot((querySnapshot)=>{
-      const items = []
-      querySnapshot.forEach((doc)=>{
-        items.push(doc)
-      })
-      setBlogs(items)
-    })
-  }
-
   useEffect(() => {
     firebase.firestore().collection("blogs").doc(blogpostid).onSnapshot(function(doc) {
       setBlog( doc.data());
@@ -35,11 +23,14 @@ function BlogContent() {
   },[blogpostid])
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const blogString = "This is my blog post - I hope you enjoyed it."
+
   const onSubmit = (data,event)=> {
     event?.preventDefault()
     console.log(data)
+    firebase.firestore().collection("blogs").doc(blogpostid).update({text: data.blogtext})
   }
   if (loading) return null
+  window.scrollTo(0, 0)
   return (
     <div className="w-[100%] flex flex-col items-center">
       <p className="text-5xl">

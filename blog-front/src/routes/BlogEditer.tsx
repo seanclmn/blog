@@ -76,7 +76,6 @@ function BlogEditor(props: Props) {
             width={{ sm: 200, lg: 300 }}
           >
             <Navbar.Section grow component={ScrollArea}>
-
               {blogs && blogs.map((blog)=><BlogLink blog_post={blog.data.title} date={blog.data.date} link={blog.id} key={blog.id}/>)}
             </Navbar.Section>
           </Navbar>
