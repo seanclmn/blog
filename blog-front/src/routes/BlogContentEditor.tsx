@@ -8,26 +8,26 @@ import firebase from "firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 
 
-function BlogContent() {  
+function BlogContentEditor() {  
 
   const [blog,setBlog]= useState([]);
   const [loading,setLoading]=useState(false)
 
 
-  let {blogpostid} = useParams();
+  let {blogposteditorid} = useParams();
   useEffect(() => {
-    firebase.firestore().collection("blogs").doc(blogpostid).onSnapshot(function(doc) {
+    firebase.firestore().collection("blogs").doc(blogposteditorid).onSnapshot(function(doc) {
       setBlog( doc.data());
       setLoading(false)
     })
-  },[blogpostid])
+  },[blogposteditorid])
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const blogString = "This is my blog post - I hope you enjoyed it."
 
   const onSubmit = (data,event)=> {
     event?.preventDefault()
     console.log(data)
-    firebase.firestore().collection("blogs").doc(blogpostid).update({text: data.blogtext})
+    firebase.firestore().collection("blogs").doc(blogposteditorid).update({text: data.blogtext})
   }
   if (loading) return null
   window.scrollTo(0, 0)
@@ -37,7 +37,7 @@ function BlogContent() {
         <b>{blog.title }</b>
       </p>
       <p>{blog.author} ({blog.date})</p>
-      {/* <p>blog content {blogpostid}</p> */}
+      {/* <p>blog content {blogposteditorid}</p> */}
       <img
         className="w-[50%] m-7"
         src={blog.image}
@@ -51,4 +51,4 @@ function BlogContent() {
   );
 }
 
-export default BlogContent;
+export default BlogContentEditor;

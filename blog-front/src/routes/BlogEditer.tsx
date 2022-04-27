@@ -28,7 +28,7 @@ export function BlogLink(props: BlogLinkProps) {
   const { blog_post, date, link } = props;
   return (
     <Link to={`/editor/${link}`} className="no-underline text-black">
-      <div className="border-solid border-x-0 border-[1px] border-gray-200 p-[10px] cursor-pointer">
+      <div className="hover:bg-gray-100 border-solid border-x-0 border-[1px] border-gray-200 p-[10px] cursor-pointer">
         <p>{blog_post} ({new Date(date).toLocaleDateString("en-US")})</p>
       </div>
     </Link>

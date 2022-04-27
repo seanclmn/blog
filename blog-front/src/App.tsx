@@ -10,7 +10,8 @@ import PrivateRoute from "./privateroute/PrivateRoute.tsx";
 import SignIn from "./routes/Signin"
 import SignUp from "./routes/Signup"
 import BlogEditor from "./routes/BlogEditer";
-import BlogContent from "./routes/BlogContentEditor";
+import BlogContentEditor from "./routes/BlogContentEditor";
+import BlogContent from "./routes/BlogContent"
 
 function App() {
 
@@ -26,9 +27,14 @@ function App() {
         <Router>
           <Routes>
             <Route path= '/editor' element={<PrivateRoute><BlogEditor/> </PrivateRoute>}>
+              <Route path=":blogposteditorid" element={<BlogContentEditor/>}/>
+            </Route>
+            <Route path='/home' element={<Home/>}>
               <Route path=":blogpostid" element={<BlogContent/>}/>
             </Route>
-            <Route path='/home' element={<Home/>}/>
+
+
+
             <Route exact path='/signin' element={<SignIn/>}/>
             <Route path='/signup' element={<SignUp/>}/>
           </Routes>
