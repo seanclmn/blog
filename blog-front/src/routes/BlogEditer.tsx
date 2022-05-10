@@ -6,15 +6,18 @@ import { Routes, Route, Link, Outlet } from "react-router-dom";
 import {
   AppShell,
   Burger,
+  Button,
   Header,
   MediaQuery,
   Navbar,
   ScrollArea,
   useMantineTheme,
+  Tabs
 } from "@mantine/core";
 import Signout from '../components/Signout'
 import { AuthProvider } from "../context/Authcontext";
 import BlogContent from "./BlogContentEditor";
+import BlogLink from "../components/BlogLink"
 
 interface Props {}
 
@@ -22,17 +25,6 @@ interface BlogLinkProps {
   blog_post: string;
   date: string;
   link: string;
-}
-
-export function BlogLink(props: BlogLinkProps) {
-  const { blog_post, date, link } = props;
-  return (
-    <Link to={`/editor/${link}`} className="no-underline text-black">
-      <div className="hover:bg-gray-100 border-solid border-x-0 border-[1px] border-gray-200 p-[10px] cursor-pointer">
-        <p>{blog_post} ({new Date(date).toLocaleDateString("en-US")})</p>
-      </div>
-    </Link>
-  );
 }
 
 function BlogEditor(props: Props) {
@@ -73,17 +65,20 @@ function BlogEditor(props: Props) {
           <Navbar
             hiddenBreakpoint="sm"
             hidden={!opened}
-            width={{ sm: 200, lg: 300 }}
+            width={{ sm: 250, lg: 250 }}
+            // className="flex flex-col items-center"
           >
+            <Navbar.Section className="flex flex-col items-center">
+             <Link to="/editor/newblog"> <Button variant="subtle" radius="xl" className="my-[10px]">New Post</Button></Link>
+            </Navbar.Section>
             <Navbar.Section grow component={ScrollArea}>
-              {blogs && blogs.map((blog)=><BlogLink blog_post={blog.data.title} date={blog.data.date} link={blog.id} key={blog.id}/>)}
+              {blogs && blogs.map((blog)=><BlogLink blog_post={blog.data.title} date={blog.data.date} link={blog.id} page={"editor"} key={blog.id}/>)}
             </Navbar.Section>
           </Navbar>
         }
         header={  
           <Header height={70} padding="md">
-            <div className="flex items-center h-[100%]">
-              <Signout/>
+            <div className="flex items-center h-[100%] justify-between">
               <MediaQuery largerThan="sm" styles={{ display: "none" }}>
                 <Burger
                   opened={opened}
@@ -93,6 +88,8 @@ function BlogEditor(props: Props) {
                   mr="xl"
                 />
               </MediaQuery>
+              <Signout/>
+
             </div>
           </Header>
         }

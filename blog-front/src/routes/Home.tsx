@@ -15,25 +15,9 @@ import {
 import Signout from '../components/Signout'
 import { AuthProvider } from "../context/Authcontext";
 import BlogContent from "./BlogContentEditor";
+import BlogLink from "../components/BlogLink"
 
 interface Props {}
-
-interface BlogLinkProps {
-  blog_post: string;
-  date: string;
-  link: string;
-}
-
-export function BlogLink(props: BlogLinkProps) {
-  const { blog_post, date, link } = props;
-  return (
-    <Link to={`/home/${link}`} className="no-underline text-black">
-      <div className="hover:bg-gray-100 border-solid border-x-0 border-[1px] border-gray-200 p-[10px] cursor-pointer">
-        <p>{blog_post} ({new Date(date).toLocaleDateString("en-US")})</p>
-      </div>
-    </Link>
-  );
-}
 
 function Home(props: Props) {
 
@@ -76,7 +60,7 @@ function Home(props: Props) {
             width={{ sm: 200, lg: 300 }}
           >
             <Navbar.Section grow component={ScrollArea}>
-              {blogs && blogs.map((blog)=><BlogLink blog_post={blog.data.title} date={blog.data.date} link={blog.id} key={blog.id}/>)}
+              {blogs && blogs.map((blog)=><BlogLink blog_post={blog.data.title} date={blog.data.date} link={blog.id} page="home" key={blog.id}/>)}
             </Navbar.Section>
           </Navbar>
         }
@@ -96,6 +80,7 @@ function Home(props: Props) {
           </Header>
         }
       >
+        {/* {document.readyState == "complete" && <Outlet/>} */}
         <Outlet/>
       </AppShell>
     </AuthProvider>

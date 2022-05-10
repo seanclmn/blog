@@ -31,10 +31,10 @@ function BlogContent() {
       </p>
       <p>{blog.author} ({blog.date})</p>
       {/* <p>blog content {blogpostid}</p> */}
-      <img
+      {document.readyState == "complete" && <img
         className="w-[50%] m-7"
         src={blog.image}
-      />
+      />}
       
       <div className="flex flex-col items-center justify-between w-[80%] h-[450px] text-left">
         <p className="w-[100%] h-[400px] resize-none overflow-auto" >{blog.text}</p>

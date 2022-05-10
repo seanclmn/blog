@@ -12,6 +12,7 @@ import SignUp from "./routes/Signup"
 import BlogEditor from "./routes/BlogEditer";
 import BlogContentEditor from "./routes/BlogContentEditor";
 import BlogContent from "./routes/BlogContent"
+import NewBlogContentEditor from "./routes/NewBlogContentEditor"
 
 function App() {
 
@@ -28,13 +29,11 @@ function App() {
           <Routes>
             <Route path= '/editor' element={<PrivateRoute><BlogEditor/> </PrivateRoute>}>
               <Route path=":blogposteditorid" element={<BlogContentEditor/>}/>
+              <Route path="newblog" element={<NewBlogContentEditor/>} />
             </Route>
             <Route path='/home' element={<Home/>}>
               <Route path=":blogpostid" element={<BlogContent/>}/>
             </Route>
-
-
-
             <Route exact path='/signin' element={<SignIn/>}/>
             <Route path='/signup' element={<SignUp/>}/>
           </Routes>
