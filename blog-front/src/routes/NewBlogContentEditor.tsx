@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom"
 import { useForm } from 'react-hook-form'
 import { auth } from "../Firebase"
 import firebase from "firebase"
+import { doc, setDoc } from "firebase/firestore"; 
+
 
 import {
   Button, 
@@ -20,8 +22,13 @@ function NewBlogContentEditor(props: Props) {
     const [loading,setLoading]=useState(false)
   
     const onSubmit = (data,event) => {
+        const today = new Date
         event?.preventDefault()
-        console.log(data)
+        const post = data
+        post.author = "Sean Coleman"
+        post.date = today.toLocaleDateString("en-US")
+        console.log(post)
+        firebase.firestore().collection("blogs").add(post)
     }
   
     const { register, handleSubmit, watch, formState: { errors } } = useForm();  
@@ -33,12 +40,12 @@ function NewBlogContentEditor(props: Props) {
         <form onSubmit={handleSubmit(onSubmit)} className="w-[100%] flex flex-col items-center h-[550px]">
           <div className="flex flex-col items-center justify-between w-[80%] h-[450px] text-left">
             <TextInput type="text" label="Title" {...register("title")}/>
-            <TextInput type="text" label="Image Link" {...register("image_link")}/>
+            <TextInput type="text" label="Image Link" {...register("image")}/>
             <Textarea 
               autosize
               minRows={10}
               className="w-[100%] mt-[50px] resize-none overflow-auto" 
-              {...register("blogtext")} 
+              {...register("text")} 
               defaultValue={blog.text}>    
             </Textarea>
           </div>

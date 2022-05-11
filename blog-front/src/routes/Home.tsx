@@ -33,7 +33,7 @@ function Home(props: Props) {
         items.push({data: doc.data(), id: doc.id})
       })
       console.log(items)
-      setBlogs(items.sort((a,b)=>new Date(a.data.date)-new Date(b.data.date)))
+      setBlogs(items.sort((a,b)=>new Date(b.data.date)-new Date(a.data.date)))
     })
   }
 
