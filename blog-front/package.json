@@ -12,8 +12,10 @@
     "@types/node": "^16.11.26",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.13",
+    "dotenv": "^16.0.1",
     "firebase": "^8.10.0",
     "react": "^17.0.2",
+    "react-app-env": "^1.2.3",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.30.0",
     "react-router-dom": "^6.2.2",
@@ -22,9 +24,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-env start'",
+    "build": "react-app-env build'",
+    "test": "react-app-env test'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

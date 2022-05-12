@@ -15,7 +15,6 @@ const Login = () => {
         auth.signInWithEmailAndPassword(data.email,data.password).then(cred=>{
             console.log(cred)
             })
-           
     }
 
     return( 

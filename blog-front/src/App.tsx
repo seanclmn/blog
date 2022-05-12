@@ -13,6 +13,7 @@ import BlogEditor from "./routes/BlogEditer";
 import BlogContentEditor from "./routes/BlogContentEditor";
 import BlogContent from "./routes/BlogContent"
 import NewBlogContentEditor from "./routes/NewBlogContentEditor"
+// require('dotenv').config({ path: '../.env' })
 
 function App() {
 

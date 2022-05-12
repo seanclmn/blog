@@ -6,12 +6,12 @@ import reportWebVitals from "./reportWebVitals";
 import { ReactLocation, Router } from "@tanstack/react-location";
 import { Routes } from "./routes";
 const location = new ReactLocation();
+// require('dotenv').config()
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router location={location} routes={Routes}>
-      <App />
-    </Router>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
