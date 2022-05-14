@@ -37,7 +37,7 @@ function BlogContent() {
       />}
       
       <div className="flex flex-col items-center justify-between w-[80%] h-[450px] text-left">
-        <p className="w-[100%] h-[400px] resize-none overflow-auto" >{blog.text}</p>
+        <p className="w-[100%] h-[400px] resize-none overflow-auto" dangerouslySetInnerHTML={{__html: blog.text}}></p>
       </div>
     </div>
   );

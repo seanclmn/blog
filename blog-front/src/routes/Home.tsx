@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import firebase from "firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { Routes, Route, Link, Outlet } from "react-router-dom";
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
 import {
   AppShell,
   Burger,
