@@ -14,10 +14,9 @@ function BlogContentEditor() {
   let {blogposteditorid} = useParams();
 
   const { setValue, register, handleSubmit, watch, formState: { errors } } = useForm();
-  const blogText = watch("blogtext")
+  const [blogText,setBlogText] = useState("")
 
   const [blog,setBlog]= useState([]);
-  const [blogDefaultText,setDefaultBlogText]=useState("")
   const [loading,setLoading]=useState(false)
 
 
@@ -25,26 +24,33 @@ function BlogContentEditor() {
   useEffect(() => {
     firebase.firestore().collection("blogs").doc(blogposteditorid).onSnapshot(async function(doc) {
       await setBlog( doc.data());
-      await setDefaultBlogText(doc.data().text)
-      // await setValue("blogtext",doc.data().text)
+      // await setBlogText(doc.data().text)
+      
+      if(!loading){
+        await setValue("blogtext",doc.data().text)
+        await setBlogText(doc.data().text)
+      }
       setLoading(false)
     })
   },[blogposteditorid])
 
   useEffect(()=>{
+    console.log("register")
     register("blogtext")
   },[register])
 
   const onEditorStateChange = (editorState) => {
+    console.log(editorState)
     setValue("blogtext", editorState)
   }
   const onSubmit = (data,event)=> {
     event?.preventDefault()
-    console.log(data)
-    // firebase.firestore().collection("blogs").doc(blogposteditorid).update({text: data.blogtext})
+    console.log("submit",data)
+    firebase.firestore().collection("blogs").doc(blogposteditorid).update({text: data.blogtext})
   }
   if (loading) return null
   // window.scrollTo(0, 0)
+  console.log("loading done",blog.text)
   return (
     <div className="w-[100%] flex flex-col items-center overflow-auto">
       <p className="text-5xl">
@@ -59,8 +65,8 @@ function BlogContentEditor() {
       
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-[80%] overflow-auto">
         {/* <textarea className="w-[100%] h-[400px] resize-none overflow-auto" {...register("blogtext")} defaultValue={blog.text}></textarea> */}
-        <ReactQuill theme="snow" className="w-[100%] h-[400px]" defaultValue={blogDefaultText}/>
-        <p className="w-[100%] h-[400px] resize-none overflow-auto" dangerouslySetInnerHTML={{__html: blogDefaultText}}></p>
+        {blog.text && <ReactQuill theme="snow" className="w-[100%] h-[400px]" defaultValue={blog.text} value={blogText} onChange={onEditorStateChange}/>}
+        {/* <p className="w-[100%] h-[400px] resize-none overflow-auto" dangerouslySetInnerHTML={{__html: blog.text}}></p> */}
 
         <Button type="submit" className="mt-[30px]">Save</Button>
       </form>
