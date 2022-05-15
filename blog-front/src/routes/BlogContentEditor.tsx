@@ -7,6 +7,7 @@ import { auth } from "../Firebase";
 import firebase from "firebase";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css'
+import Texteditor from "../components/Texteditor";
 import { doc, onSnapshot } from "firebase/firestore";
 
 
@@ -48,27 +49,30 @@ function BlogContentEditor() {
     console.log("submit",data)
     firebase.firestore().collection("blogs").doc(blogposteditorid).update({text: data.blogtext})
   }
-  if (loading) return null
+  if (loading || !blog.image) return null
   // window.scrollTo(0, 0)
   console.log("loading done",blog.text)
   return (
-    <div className="w-[100%] flex flex-col items-center overflow-auto">
+    <div className="w-[100%] flex flex-col items-center">
       <p className="text-5xl">
         <b>{blog.title }</b>
       </p>
       <p>{blog.author} ({blog.date})</p>
-      {/* <p>blog content {blogposteditorid}</p> */}
       <img
-        className="w-[50%] m-7"
+        className="w-[60%] m-7"
         src={blog.image}
+        alt={blog.image}
       />
       
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-[80%] overflow-auto">
-        {/* <textarea className="w-[100%] h-[400px] resize-none overflow-auto" {...register("blogtext")} defaultValue={blog.text}></textarea> */}
-        {blog.text && <ReactQuill theme="snow" className="w-[100%] h-[400px]" defaultValue={blog.text} value={blogText} onChange={onEditorStateChange}/>}
-        {/* <p className="w-[100%] h-[400px] resize-none overflow-auto" dangerouslySetInnerHTML={{__html: blog.text}}></p> */}
-
-        <Button type="submit" className="mt-[30px]">Save</Button>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-[80%]">
+        {blog.text && 
+          <Texteditor 
+            defaultValue={blog.text} 
+            value={blogText} 
+            onChange={onEditorStateChange}
+          />
+        }
+        <Button type="submit" className="mt-[60px]">Save</Button>
       </form>
     </div>
   );
