@@ -12,6 +12,7 @@ import {
   TextInput,
   Textarea,
 } from "@mantine/core"
+import Texteditor from '../components/Texteditor'
 
 
 interface Props {}
@@ -19,6 +20,7 @@ interface Props {}
 function NewBlogContentEditor(props: Props) {  
 
     const [blog,setBlog]= useState([]);
+    const [blogText,setBlogText] = useState("")
     const [loading,setLoading]=useState(false)
   
     const onSubmit = (data,event) => {
@@ -31,8 +33,11 @@ function NewBlogContentEditor(props: Props) {
         firebase.firestore().collection("blogs").add(post)
     }
   
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();  
-
+    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm();  
+    const onEditorStateChange = (editorState) => {
+      console.log(editorState)
+      setValue("text", editorState)
+    }
     if (loading) return null
     window.scrollTo(0, 0)
     return (
@@ -41,13 +46,13 @@ function NewBlogContentEditor(props: Props) {
           <div className="flex flex-col items-center justify-between w-[80%] h-[450px] text-left">
             <TextInput type="text" label="Title" {...register("title")}/>
             <TextInput type="text" label="Image Link" {...register("image")}/>
-            <Textarea 
-              autosize
-              minRows={10}
-              className="w-[100%] mt-[50px] resize-none overflow-auto" 
-              {...register("text")} 
-              defaultValue={blog.text}>    
-            </Textarea>
+            <Texteditor
+              defaultValue={""}
+              value={blogText}
+              onChange={onEditorStateChange}
+            />
+
+
           </div>
           <Button 
             type="submit"

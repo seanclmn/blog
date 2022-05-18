@@ -17,7 +17,7 @@ function BlogContentEditor() {
   const { setValue, register, handleSubmit, watch, formState: { errors } } = useForm();
   const [blogText,setBlogText] = useState("")
 
-  const [blog,setBlog]= useState([]);
+  const [blog,setBlog]= useState({text: ""});
   const [loading,setLoading]=useState(false)
 
 
@@ -49,29 +49,33 @@ function BlogContentEditor() {
     console.log("submit",data)
     firebase.firestore().collection("blogs").doc(blogposteditorid).update({text: data.blogtext})
   }
-  if (loading || !blog.image) return null
-  // window.scrollTo(0, 0)
-  console.log("loading done",blog.text)
+  if (loading || !blog.author) return null
   return (
     <div className="w-[100%] flex flex-col items-center">
       <p className="text-5xl">
         <b>{blog.title }</b>
       </p>
       <p>{blog.author} ({blog.date})</p>
-      <img
-        className="w-[60%] m-7"
-        src={blog.image}
-        alt={blog.image}
-      />
+      {
+        !blog.image ? 
+        <div 
+          className="border-solid rounded border-[0.5px] w-[60%] h-[300px] m-7 text-center "
+          >
+          <p>Loading...</p>
+        </div>:
+        <img
+          className="w-[60%] m-7"
+          src={blog.image}
+          alt={blog.image}
+        />
+      }
       
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-[80%]">
-        {blog.text && 
-          <Texteditor 
-            defaultValue={blog.text} 
-            value={blogText} 
-            onChange={onEditorStateChange}
-          />
-        }
+        <Texteditor 
+          defaultValue={blog.text} 
+          value={blogText} 
+          onChange={onEditorStateChange}
+        />
         <Button type="submit" className="mt-[60px]">Save</Button>
       </form>
     </div>
