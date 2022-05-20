@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import firebase from "firebase";
 import { doc, onSnapshot } from "firebase/firestore";
-import { Routes, Route, Link, Outlet } from "react-router-dom";
+import { Routes, Route, Link, Outlet, useOutlet,Navigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {
@@ -13,6 +13,7 @@ import {
   Navbar,
   ScrollArea,
   useMantineTheme,
+  LoadingOverlay
 } from "@mantine/core";
 import Signout from '../components/Signout'
 import { AuthProvider } from "../context/Authcontext";
@@ -23,9 +24,10 @@ interface Props {}
 
 function Home(props: Props) {
 
-  const [blogs, setBlogs] = useState()
+  const [blogs, setBlogs] = useState([])
   const [loading, setLoading] = useState(true)
 
+  const outlet = useOutlet()
   const ref = firebase.firestore().collection("blogs")
   function getBlogs(){
     
@@ -39,7 +41,6 @@ function Home(props: Props) {
     })
   }
 
-  const {} = props;
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
 
@@ -48,7 +49,8 @@ function Home(props: Props) {
     setLoading(false)
   },[])
 
-  if(loading) return <p>loading...</p>
+  if(loading || !blogs.length) return <div className="w-[100vw] h-[100vh] relative"><></><LoadingOverlay visible={loading || !blogs.length}/></div>
+
 
   return (
     <AuthProvider>
@@ -82,8 +84,7 @@ function Home(props: Props) {
           </Header>
         }
       >
-        {/* {document.readyState == "complete" && <Outlet/>} */}
-        <Outlet/>
+       {!outlet ?<Navigate to={`/home/${blogs[0].id}`} />: <Outlet/>}
       </AppShell>
     </AuthProvider>
   );

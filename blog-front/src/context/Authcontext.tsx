@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
   if (loading) {
     return (
       <div>
-        <p>Loading...</p>
+
       </div>
     );
   }
