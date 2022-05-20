@@ -32,7 +32,7 @@ function App() {
               <Route path=":blogposteditorid" element={<BlogContentEditor/>}/>
               <Route path="newblog" element={<NewBlogContentEditor/>} />
             </Route>
-            <Route path='/home' element={<Home/>}>
+            <Route path='/' element={<Home/>}>
               <Route path=":blogpostid" element={<BlogContent/>}/>
             </Route>
             <Route exact path='/signin' element={<SignIn/>}/>

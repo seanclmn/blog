@@ -5,7 +5,7 @@ import Signup from "./routes/Signup"
 import Signin from "./routes/Signin"
 export const Routes = [
   {
-    path: "home",
+    path: "/",
     element: <Home />,
     children: [
       {

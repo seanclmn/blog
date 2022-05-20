@@ -49,7 +49,7 @@ function Home(props: Props) {
     setLoading(false)
   },[])
 
-  if(loading || !blogs.length) return <div className="w-[100vw] h-[100vh] relative"><></><LoadingOverlay visible={loading || !blogs.length}/></div>
+  if(loading || !blogs.length) return <div className="w-[100%] h-[100vh]"><></><LoadingOverlay visible={loading || !blogs.length}/></div>
 
 
   return (
@@ -64,7 +64,7 @@ function Home(props: Props) {
             width={{ sm: 200, lg: 300 }}
           >
             <Navbar.Section grow component={ScrollArea}>
-              {blogs && blogs.map((blog)=><BlogLink blog_post={blog.data.title} date={blog.data.date} link={blog.id} page="home" key={blog.id}/>)}
+              {blogs && blogs.map((blog)=><BlogLink blog_post={blog.data.title} date={blog.data.date} link={blog.id} page="" key={blog.id}/>)}
             </Navbar.Section>
           </Navbar>
         }
@@ -84,7 +84,7 @@ function Home(props: Props) {
           </Header>
         }
       >
-       {!outlet ?<Navigate to={`/home/${blogs[0].id}`} />: <Outlet/>}
+       {!outlet ?<Navigate to={`/${blogs[0].id}`} />: <Outlet/>}
       </AppShell>
     </AuthProvider>
   );
