@@ -5,7 +5,8 @@ import logo from "./logo.svg";
 import { AuthProvider } from "./context/Authcontext"
 import {auth} from "./Firebase"
 import { BrowserRouter as Router, Switch, Routes, Route} from 'react-router-dom'
-import Home from "./routes/Home";
+import Explore from "./routes/Explore";
+import Home from "./routes/Home"
 import PrivateRoute from "./privateroute/PrivateRoute.tsx";
 import SignIn from "./routes/Signin"
 import SignUp from "./routes/Signup"
@@ -13,6 +14,7 @@ import BlogEditor from "./routes/BlogEditer";
 import BlogContentEditor from "./routes/BlogContentEditor";
 import BlogContent from "./routes/BlogContent"
 import NewBlogContentEditor from "./routes/NewBlogContentEditor"
+import { isOmittedExpression } from "typescript";
 // require('dotenv').config({ path: '../.env' })
 
 function App() {
@@ -24,15 +26,16 @@ function App() {
   },[])
 
   return (
-    <div className="App">
+    <div>
       <AuthProvider> 
         <Router>
           <Routes>
+            <Route path="home" element={<Home/>}/>
             <Route path= '/editor' element={<PrivateRoute><BlogEditor/> </PrivateRoute>}>
               <Route path=":blogposteditorid" element={<BlogContentEditor/>}/>
               <Route path="newblog" element={<NewBlogContentEditor/>} />
             </Route>
-            <Route path='/' element={<Home/>}>
+            <Route path='/explore' element={<Explore/>}>
               <Route path=":blogpostid" element={<BlogContent/>}/>
             </Route>
             <Route exact path='/signin' element={<SignIn/>}/>

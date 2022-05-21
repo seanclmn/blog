@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import firebase from "firebase";
 import { doc, onSnapshot } from "firebase/firestore";
-import { Routes, Route, Link, Outlet } from "react-router-dom";
+import { Routes, Route, Link, Outlet, useOutlet, Navigate } from "react-router-dom";
 import {
   AppShell,
   Burger,
@@ -29,8 +29,9 @@ interface BlogLinkProps {
 
 function BlogEditor(props: Props) {
 
-  const [blogs, setBlogs] = useState()
+  const [blogs, setBlogs] = useState([])
   const [loading, setLoading] = useState(true)
+  const outlet = useOutlet()
 
   const ref = firebase.firestore().collection("blogs")
   function getBlogs(){
@@ -54,7 +55,7 @@ function BlogEditor(props: Props) {
     setLoading(false)
   },[])
 
-  if(loading) return <p>loading...</p>
+  if(loading || !blogs.length) return <p>loading...</p>
 
   return (
     <AuthProvider>
@@ -94,7 +95,7 @@ function BlogEditor(props: Props) {
           </Header>
         }
       >
-        <Outlet/>
+       {!outlet ?<Navigate to={`/editor/${blogs[0].id}`} />: <Outlet/>}
       </AppShell>
     </AuthProvider>
   );

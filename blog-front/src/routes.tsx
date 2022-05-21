@@ -1,5 +1,5 @@
 import BlogContent from "./routes/BlogContentEditor";
-import Home from "./routes/Home";
+import Home from "./routes/Explore";
 import BlogEditor from "./routes/BlogEditer";
 import Signup from "./routes/Signup"
 import Signin from "./routes/Signin"
