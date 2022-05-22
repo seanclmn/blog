@@ -4,9 +4,12 @@ import React,{useEffect, useState} from 'react'
 import firebase from "firebase"
 import {doc,onSnapshot} from "firebase/firestore"
 import BlogBlock from "../components/BlogBlock"
+import {Link} from 'react-router-dom'
 import {
   SimpleGrid,
-  LoadingOverlay
+  LoadingOverlay,
+  AppShell,
+  Header
 } from "@mantine/core";
 interface Props {}
 
@@ -34,10 +37,19 @@ function Home(props: Props) {
 
   if(loading || !blogs.length) return <div className="w-[100%] h-[100vh]"><></><LoadingOverlay visible={loading || !blogs.length}/></div>
   return (
-    <div
-      className="w-[75%] mx-auto"
-      >
-      <SimpleGrid 
+
+    <AppShell
+    fixed
+    header={
+      <Header height={70} p="xs" className="px-[50px]">
+        <Link to="/" className="cursor-pointer no-underline text-black">
+          <h1>Blog</h1>
+        </Link>
+      </Header>
+    }
+  >
+    <SimpleGrid 
+        className="w-[75%] mx-auto my-[20px]"
         breakpoints={[
           { minWidth: 0, cols: 1 },
           { minWidth: 1000, cols: 2 },
@@ -53,7 +65,14 @@ function Home(props: Props) {
             link={blog.id}/>
           )}
       </SimpleGrid>
-    </div>
+  </AppShell>
+    // <div className="bg-gray-50 w-[100%]">
+      // <div 
+      //   className="h-[60px] px-[40px] bg-white 
+      //   border-solid border-b-gray-200 
+      //   border-[0px] border-b-[1px]">
+      //   <h1>Blog</h1>      </div>
+    // </div>
   )
 }
 

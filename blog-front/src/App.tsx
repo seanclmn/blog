@@ -26,24 +26,23 @@ function App() {
   },[])
 
   return (
-    <div>
-      <AuthProvider> 
-        <Router>
-          <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path= '/editor' element={<PrivateRoute><BlogEditor/> </PrivateRoute>}>
-              <Route path=":blogposteditorid" element={<BlogContentEditor/>}/>
-              <Route path="newblog" element={<NewBlogContentEditor/>} />
-            </Route>
-            <Route path='/explore' element={<Explore/>}>
-              <Route path=":blogpostid" element={<BlogContent/>}/>
-            </Route>
-            <Route exact path='/signin' element={<SignIn/>}/>
-            <Route path='/signup' element={<SignUp/>}/>
-          </Routes>
-        </Router>
-      </AuthProvider>
-    </div>
+
+    <AuthProvider className="bg-gray-50"> 
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path= '/editor' element={<PrivateRoute><BlogEditor/> </PrivateRoute>}>
+            <Route path=":blogposteditorid" element={<BlogContentEditor/>}/>
+            <Route path="newblog" element={<NewBlogContentEditor/>} />
+          </Route>
+          <Route path='/explore' element={<Explore/>}>
+            <Route path=":blogpostid" element={<BlogContent/>}/>
+          </Route>
+          <Route exact path='/signin' element={<SignIn/>}/>
+          <Route path='/signup' element={<SignUp/>}/>
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

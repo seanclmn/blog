@@ -76,7 +76,10 @@ function BlogContentEditor() {
           value={blogText} 
           onChange={onEditorStateChange}
         />
-        <Button type="submit" className="mt-[60px]">Save</Button>
+        <div className="w-[200px] flex flex-row justify-between">
+          <Button className="w-[80px]" color={"red"}>Delete</Button>
+          <Button className="w-[80px]" type="submit">Save</Button>
+        </div>
       </form>
     </div>
   );

@@ -11,7 +11,8 @@ function Texteditor({value,defaultValue,onChange}) {
     <ReactQuill 
       theme="snow" 
       preserveWhitespace="true"
-      className="w-[100%] h-[400px]" 
+      className="w-[100%] h-[400px] mb-[80px]"
+
       modules={{
         clipboard: {
           matchVisual: false,

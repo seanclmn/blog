@@ -33,7 +33,6 @@ function BlogContent() {
         !blog.title ?
         
         <div className="w-[100%] relative">
-        <div className="w-[100%] h-[100%] flex flex-col items-center"><p>something</p></div>
         <LoadingOverlay visible={true} />
         </div>:
         <div className="w-[100%] flex flex-col items-center relative">
@@ -44,6 +43,7 @@ function BlogContent() {
             {<img
               className="w-[50%] m-7"
               src={blog.image}
+              loading="lazy"
             />}
             
             <div className="flex flex-col items-center justify-between w-[80%] h-[450px] text-left">

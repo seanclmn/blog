@@ -65,8 +65,9 @@ function Explore(props: Props) {
         </Navbar>
       }
       header={  
-        <Header height={70} padding="md">
-          <div className="flex items-center h-[100%]">
+        <Header height={70} >
+          <div className="flex items-center h-[100%] px-[50px]">
+
             <MediaQuery largerThan="sm" styles={{ display: "none" }}>
               <Burger
                 opened={opened}
@@ -76,6 +77,7 @@ function Explore(props: Props) {
                 mr="xl"
               />
             </MediaQuery>
+            <Link to="/" className="cursor-pointer no-underline text-black"><h1>Blog</h1></Link>
           </div>
         </Header>
       }
