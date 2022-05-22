@@ -5,7 +5,8 @@ import firebase from "firebase"
 import {doc,onSnapshot} from "firebase/firestore"
 import BlogBlock from "../components/BlogBlock"
 import {
-  SimpleGrid
+  SimpleGrid,
+  LoadingOverlay
 } from "@mantine/core";
 interface Props {}
 
@@ -31,7 +32,7 @@ function Home(props: Props) {
     setLoading(false)
   },[])
 
-  if(loading || !blogs.length) return <p>loading...</p>
+  if(loading || !blogs.length) return <div className="w-[100%] h-[100vh]"><></><LoadingOverlay visible={loading || !blogs.length}/></div>
   return (
     <div
       className="w-[75%] mx-auto"
@@ -43,7 +44,14 @@ function Home(props: Props) {
           { minWidth: 1400, cols: 3 },
         ]}
         cols={3}>
-        {blogs.map((blog)=><BlogBlock key={blog.id} title={blog.data.title} date={blog.data.date} img={blog.data.image} link={blog.id}/>)}
+        {blogs.map((blog)=>
+          <BlogBlock 
+            key={blog.id} 
+            title={blog.data.title} 
+            date={blog.data.date} 
+            img={blog.data.image} 
+            link={blog.id}/>
+          )}
       </SimpleGrid>
     </div>
   )

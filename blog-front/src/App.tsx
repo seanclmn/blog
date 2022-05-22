@@ -30,7 +30,7 @@ function App() {
       <AuthProvider> 
         <Router>
           <Routes>
-            <Route path="home" element={<Home/>}/>
+            <Route path="/" element={<Home/>}/>
             <Route path= '/editor' element={<PrivateRoute><BlogEditor/> </PrivateRoute>}>
               <Route path=":blogposteditorid" element={<BlogContentEditor/>}/>
               <Route path="newblog" element={<NewBlogContentEditor/>} />

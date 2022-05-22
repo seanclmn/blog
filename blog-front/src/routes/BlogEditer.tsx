@@ -12,7 +12,7 @@ import {
   Navbar,
   ScrollArea,
   useMantineTheme,
-  Tabs
+  LoadingOverlay
 } from "@mantine/core";
 import Signout from '../components/Signout'
 import { AuthProvider } from "../context/Authcontext";
@@ -55,7 +55,7 @@ function BlogEditor(props: Props) {
     setLoading(false)
   },[])
 
-  if(loading || !blogs.length) return <p>loading...</p>
+  if(loading || !blogs.length) return <div className="w-[100%] h-[100vh]"><></><LoadingOverlay visible={loading || !blogs.length}/></div>
 
   return (
     <AuthProvider>
