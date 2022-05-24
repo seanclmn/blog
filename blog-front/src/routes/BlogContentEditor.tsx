@@ -9,6 +9,7 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css'
 import Texteditor from "../components/Texteditor";
 import { doc, onSnapshot } from "firebase/firestore";
+import DeleteButton from "../components/DeleteButton";
 
 
 function BlogContentEditor() {  
@@ -20,16 +21,12 @@ function BlogContentEditor() {
   const [blog,setBlog]= useState({text: ""});
   const [loading,setLoading]=useState(false)
 
-
-
   useEffect(() => {
     firebase.firestore().collection("blogs").doc(blogposteditorid).onSnapshot(async function(doc) {
-      await setBlog( doc.data());
-      // await setBlogText(doc.data().text)
-      
+      setBlog( doc.data());
       if(!loading){
-        await setValue("blogtext",doc.data().text)
-        await setBlogText(doc.data().text)
+        setValue("blogtext",doc.data().text)
+        setBlogText(doc.data().text)
       }
       setLoading(false)
     })
@@ -40,6 +37,10 @@ function BlogContentEditor() {
     register("blogtext")
   },[register])
 
+  const deleteBlog = () => {
+    firebase.firestore().collection("blogs").doc(blogposteditorid).delete()
+  }
+
   const onEditorStateChange = (editorState) => {
     console.log(editorState)
     setValue("blogtext", editorState)
@@ -49,7 +50,7 @@ function BlogContentEditor() {
     console.log("submit",data)
     firebase.firestore().collection("blogs").doc(blogposteditorid).update({text: data.blogtext})
   }
-  if (loading || !blog.author) return null
+  if (loading || !blog.text) return null
   return (
     <div className="w-[100%] flex flex-col items-center">
       <p className="text-5xl">
@@ -77,7 +78,8 @@ function BlogContentEditor() {
           onChange={onEditorStateChange}
         />
         <div className="w-[200px] flex flex-row justify-between">
-          <Button className="w-[80px]" color={"red"}>Delete</Button>
+          {/* <Button className="w-[80px]" color={"red"} onClick={()=>deleteBlog()}>Delete</Button> */}
+          <DeleteButton id={blogposteditorid}/>
           <Button className="w-[80px]" type="submit">Save</Button>
         </div>
       </form>

@@ -1,9 +1,13 @@
-//@ts-nocheck
 import React from 'react'
 import {Link} from 'react-router-dom'
-interface Props {}
+interface Props {
+  title: string
+  date: string
+  img: string
+  link: string
+}
 
-function BlogBlock({title, date, img, link}) {
+function BlogBlock({title, date, img, link}:Props) {
   return (
     <Link 
       to={`/explore/${link}`}

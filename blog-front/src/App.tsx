@@ -4,7 +4,7 @@ import logo from "./logo.svg";
 
 import { AuthProvider } from "./context/Authcontext"
 import {auth} from "./Firebase"
-import { BrowserRouter as Router, Switch, Routes, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Navigate, Routes, Route} from 'react-router-dom'
 import Explore from "./routes/Explore";
 import Home from "./routes/Home"
 import PrivateRoute from "./privateroute/PrivateRoute.tsx";
@@ -30,9 +30,10 @@ function App() {
     <AuthProvider className="bg-gray-50"> 
       <Router>
         <Routes>
-          <Route path="/" element={<Home/>}/>
+          <Route path="/" element={<Home/>}/>          
           <Route path= '/editor' element={<PrivateRoute><BlogEditor/> </PrivateRoute>}>
             <Route path=":blogposteditorid" element={<BlogContentEditor/>}/>
+            <Route element={<p>noice</p>}/>
             <Route path="newblog" element={<NewBlogContentEditor/>} />
           </Route>
           <Route path='/explore' element={<Explore/>}>
