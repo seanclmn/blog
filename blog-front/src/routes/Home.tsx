@@ -42,37 +42,32 @@ function Home(props: Props) {
     fixed
     header={
       <Header height={70} p="xs" className="px-[50px]">
-        <Link to="/" className="cursor-pointer no-underline text-black">
-          <h1>Blog</h1>
-        </Link>
+        <div className='w-[60px]'>
+          <Link to="/" className="cursor-pointer no-underline text-black">
+            <h1 >Blog</h1>
+          </Link>
+        </div>
       </Header>
     }
   >
-    <SimpleGrid 
-        className="w-[75%] mx-auto my-[20px]"
-        breakpoints={[
-          { minWidth: 0, cols: 1 },
-          { minWidth: 1000, cols: 2 },
-          { minWidth: 1400, cols: 3 },
-        ]}
-        cols={3}>
-        {blogs.map((blog)=>
-          <BlogBlock 
-            key={blog.id} 
-            title={blog.data.title} 
-            date={blog.data.date} 
-            img={blog.data.image} 
-            link={blog.id}/>
-          )}
-      </SimpleGrid>
+    {blogs.length!==0 && <SimpleGrid 
+      className="w-[75%] mx-auto"
+      breakpoints={[
+        { minWidth: 0, cols: 1 },
+        { minWidth: 1000, cols: 2 },
+        { minWidth: 1400, cols: 3 },
+      ]}
+      cols={3}>
+      {blogs.map((blog)=>
+        <BlogBlock 
+          key={blog.id} 
+          title={blog.data.title} 
+          date={blog.data.date} 
+          img={blog.data.image} 
+          link={blog.id}/>
+        )}
+    </SimpleGrid>}
   </AppShell>
-    // <div className="bg-gray-50 w-[100%]">
-      // <div 
-      //   className="h-[60px] px-[40px] bg-white 
-      //   border-solid border-b-gray-200 
-      //   border-[0px] border-b-[1px]">
-      //   <h1>Blog</h1>      </div>
-    // </div>
   )
 }
 

@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, {useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import {useForm } from 'react-hook-form'
 import { Textarea, Button } from '@mantine/core'
 import { auth } from "../Firebase";
@@ -18,7 +18,7 @@ function BlogContentEditor() {
   const { setValue, register, handleSubmit, watch, formState: { errors } } = useForm();
   const [blogText,setBlogText] = useState("")
 
-  const [blog,setBlog]= useState({text: ""});
+  const [blog,setBlog]= useState({title:"",text: "",author:"",date:"",});
   const [loading,setLoading]=useState(false)
 
   useEffect(() => {
@@ -37,10 +37,6 @@ function BlogContentEditor() {
     register("blogtext")
   },[register])
 
-  const deleteBlog = () => {
-    firebase.firestore().collection("blogs").doc(blogposteditorid).delete()
-  }
-
   const onEditorStateChange = (editorState) => {
     console.log(editorState)
     setValue("blogtext", editorState)
@@ -50,7 +46,9 @@ function BlogContentEditor() {
     console.log("submit",data)
     firebase.firestore().collection("blogs").doc(blogposteditorid).update({text: data.blogtext})
   }
-  if (loading || !blog.text) return null
+
+  if (!loading && blog == null) return <Navigate to="/editor"/>
+  if (loading) return null
   return (
     <div className="w-[100%] flex flex-col items-center">
       <p className="text-5xl">
