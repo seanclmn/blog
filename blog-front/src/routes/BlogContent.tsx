@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, {useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
+import { useParams,Navigate } from "react-router-dom";
 import {useForm } from 'react-hook-form'
 import { LoadingOverlay, Textarea, Button } from '@mantine/core'
 import { auth } from "../Firebase";
@@ -22,6 +22,8 @@ function BlogContent() {
       setLoading(false)
     })
   },[blogpostid])
+
+  if (!loading && blog == null) return <Navigate to="/explore"/>
 
   if (loading) return null
   window.scrollTo(0, 0)

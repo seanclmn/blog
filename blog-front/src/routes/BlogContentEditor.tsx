@@ -76,7 +76,6 @@ function BlogContentEditor() {
           onChange={onEditorStateChange}
         />
         <div className="w-[200px] flex flex-row justify-between">
-          {/* <Button className="w-[80px]" color={"red"} onClick={()=>deleteBlog()}>Delete</Button> */}
           <DeleteButton id={blogposteditorid}/>
           <Button className="w-[80px]" type="submit">Save</Button>
         </div>
